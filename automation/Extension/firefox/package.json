@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Mozilla",
   "dependencies": {
-    "openwpm-webext-instrumentation": "github:mozilla/openwpm-webext-instrumentation#master"
+    "openwpm-webext-instrumentation": "github:mercator-working-group/openwpm-webext-instrumentation"
   },
   "devDependencies": {
     "eslint": "^5.0.1",
