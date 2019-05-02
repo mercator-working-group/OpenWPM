@@ -62,12 +62,13 @@ def get_command_output(command, cwd=None):
 
 
 def colorize(line):
-    if INSERT_PREFIX in line:  # print long DB insert lines in blue
-        line = line.replace(INSERT_PREFIX, bcolors.OKBLUE + INSERT_PREFIX)
-    if OPENWPM_LOG_PREFIX in line:
-        line = line.replace(OPENWPM_LOG_PREFIX,
-                            OPENWPM_LOG_PREFIX + bcolors.OKGREEN)
     return line
+    # if INSERT_PREFIX in line:  # print long DB insert lines in blue
+    #     line = line.replace(INSERT_PREFIX, bcolors.OKBLUE + INSERT_PREFIX)
+    # if OPENWPM_LOG_PREFIX in line:
+    #     line = line.replace(OPENWPM_LOG_PREFIX,
+    #                         OPENWPM_LOG_PREFIX + bcolors.OKGREEN)
+    # return line
 
 
 def start_webdriver(with_extension=False):
