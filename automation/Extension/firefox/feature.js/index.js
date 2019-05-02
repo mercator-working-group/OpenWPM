@@ -18,10 +18,10 @@ async function main() {
     console.log("WARNING: config not found. Assuming this is a test run of",
                 "the extension. Outputting all queries to console.");
     config = {
-      navigation_instrument:true,
-      cookie_instrument:true,
+      navigation_instrument:false,
+      cookie_instrument:false,
       js_instrument:true,
-      http_instrument:true,
+      http_instrument:false,
       save_javascript:false,
       save_all_content:false,
       crawl_id:0
