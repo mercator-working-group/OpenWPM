@@ -23,7 +23,7 @@ class CommandSequence:
     called prior to one of those two commands.
     """
 
-    def __init__(self, url, reset=False, blocking=False):
+    def __init__(self, url, parent_url, reset=False, blocking=False):
         """Initialize command sequence.
 
         Parameters
@@ -36,6 +36,7 @@ class CommandSequence:
             True if sequence should block parent process during execution
         """
         self.url = url
+        self.parent_url = parent_url
         self.reset = reset
         self.blocking = blocking
         self.commands_with_timeout = []
