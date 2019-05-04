@@ -8,6 +8,8 @@ from sys import platform
 
 import pandas as pd
 
+import json
+
 
 # The list of sites that we wish to crawl
 NUM_BROWSERS = 3
@@ -39,18 +41,29 @@ manager_params['log_directory'] = '~/Desktop/'
 manager = TaskManager.TaskManager(manager_params, browser_params)
 
 # Visits the sites with all browsers simultaneously
-with open('gemeente-social/gemeente_urls.csv', newline='') as csvfile:
-    for site in csvfile:
-        command_sequence = CommandSequence.CommandSequence(site)
+with open('gemeente-social/gemeente-out-full.json', newline='') as source_json:
+    counter = 0
+    data = json.load(source_json)
+    for parent_site, site_list in data.items():
+        counter += 1
+        print(f"Processing Parent Site {counter}/{len(data)}")
+        child_counter = 0
+        all_sites = site_list + [parent_site]
 
-        # Start by visiting the page
-        command_sequence.get(sleep=0, timeout=60)
+        for site in all_sites:
+            child_counter += 1
+            print(f"Processing Child Site {child_counter}/{len(all_sites)} for Parent {counter}")
 
-        # dump_profile_cookies/dump_flash_cookies closes the current tab.
-        command_sequence.dump_profile_cookies(120)
+            command_sequence = CommandSequence.CommandSequence(site, parent_site)
 
-        # index='**' synchronizes visits between the three browsers
-        manager.execute_command_sequence(command_sequence, index='**')
+            # Start by visiting the page
+            command_sequence.get(sleep=0, timeout=60)
 
-    # Shuts down the browsers and waits for the data to finish logging
+            # dump_profile_cookies/dump_flash_cookies closes the current tab.
+            command_sequence.dump_profile_cookies(120)
+
+            # index='**' synchronizes visits between the three browsers
+            manager.execute_command_sequence(command_sequence, index='**')
+
+        # Shuts down the browsers and waits for the data to finish logging
 manager.close()
