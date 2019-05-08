@@ -52,9 +52,6 @@ with open('gemeente-social/gemeente-out-full.json', newline='') as source_json:
             # Start by visiting the page
             command_sequence.get(sleep=0, timeout=60)
 
-            # dump_profile_cookies/dump_flash_cookies closes the current tab.
-            command_sequence.dump_profile_cookies(120)
-
             # index='**' synchronizes visits between the three browsers
             manager.execute_command_sequence(command_sequence, index=None)
 
