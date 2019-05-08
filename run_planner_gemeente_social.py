@@ -6,17 +6,10 @@ from automation import CommandSequence, TaskManager
 
 from sys import platform
 
-import pandas as pd
-
 import json
-
 
 # The list of sites that we wish to crawl
 NUM_BROWSERS = 8
-
-# sites_csv = pd.read_csv('gemeente-social/gemeente_urls.csv')
-
-# sites = sites_csv['SITES']
 
 # Loads the manager preference and 3 copies of the default browser dictionaries
 manager_params, browser_params = TaskManager.load_default_params(NUM_BROWSERS)
@@ -28,11 +21,9 @@ for i in range(NUM_BROWSERS):
     # Record JS Web API calls
     browser_params[i]['js_instrument'] = True
     # Enable flash for all three browsers
-    browser_params[i]['disable_flash'] = False
-# if platform != 'darwin':
-    browser_params[i]['headless'] = True  # Launch only browser 0 headless
-
-
+    browser_params[i]['disable_flash'] = True
+    # Run headless
+    browser_params[i]['headless'] = True
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params['data_directory'] = '~/Desktop/'
