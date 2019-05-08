@@ -12,7 +12,7 @@ import json
 
 
 # The list of sites that we wish to crawl
-NUM_BROWSERS = 3
+NUM_BROWSERS = 8
 
 # sites_csv = pd.read_csv('gemeente-social/gemeente_urls.csv')
 
@@ -29,8 +29,10 @@ for i in range(NUM_BROWSERS):
     browser_params[i]['js_instrument'] = True
     # Enable flash for all three browsers
     browser_params[i]['disable_flash'] = False
-if platform != 'darwin':
-    browser_params[0]['headless'] = True  # Launch only browser 0 headless
+# if platform != 'darwin':
+    browser_params[i]['headless'] = True  # Launch only browser 0 headless
+
+
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params['data_directory'] = '~/Desktop/'
@@ -63,7 +65,7 @@ with open('gemeente-social/gemeente-out-full.json', newline='') as source_json:
             command_sequence.dump_profile_cookies(120)
 
             # index='**' synchronizes visits between the three browsers
-            manager.execute_command_sequence(command_sequence, index='**')
+            manager.execute_command_sequence(command_sequence, index=None)
 
         # Shuts down the browsers and waits for the data to finish logging
 manager.close()
